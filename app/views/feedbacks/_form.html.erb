@@ -1,0 +1,109 @@
+<%= form_with(model: feedback) do |form| %>
+  <% if feedback.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(feedback.errors.count, "error") %> prohibited this feedback from being saved:</h2>
+
+      <ul>
+        <% feedback.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="container">
+    <br/>
+    <br/>
+    <br/>
+    <h1 class="display-7 text-center">Please share areas of improvement</h1>
+    <br/>
+
+    <div class="form-check text-center">
+      <div class="row">
+        <div class="col">
+          <div class="checkbox">
+            <label>
+              <%= form.check_box :foul_smell %>
+              Foul Smell
+            </label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="checkbox">
+            <label>
+              <%= form.check_box :mirror_dirty %>
+              Mirror Dirty
+            </label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="checkbox">
+            <label>
+              <%= form.check_box :toilet_bowl %>
+              Toilet Bowl Dirty
+            </label>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col">
+          <div class="checkbox">
+            <label>
+              <%= form.check_box :wet_floor %>
+              Wet Floor
+            </label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="checkbox">
+            <label>
+              <%= form.check_box :water_tap %>
+              Water Tap Faulty
+            </label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="checkbox">
+            <label>
+              <%= form.check_box :toilet_paper %>
+              No Toilet Paper
+            </label>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col">
+          <div class="checkbox">
+            <label>
+              <%= form.check_box :rubbish_bin %>
+              Rubbish Bin Full
+            </label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="checkbox">
+            <label>
+              <%= form.check_box :no_soap %>
+              No Soap
+            </label>
+          </div>
+        </div>
+        <div class="col">
+          <div class="checkbox">
+            <label>
+              <%= form.check_box :hand_dryer %>
+              Hand Dryer Faulty
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <br/>
+  <div class="actions text-center">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,36 @@
+<br/>
+<br/>
+<div class="row">
+  <div class="col">
+    <h3>We are committed to providing first</h3>
+    <h3>class facilities for customers.</h3>
+  </div>
+</div>
+<br/>
+<br/>
+<br/>
+<h1 class="display-6 text-center">Good Morning</h1>
+<h1 class="display-6 text-center">Please rate our washroom</h1>
+<br/>
+<br/>
+
+
+      <!-- <div class="col-sm-6 col-md-4">
+        <div class="img-fluid"> -->
+        <% @smileys.each do |smiley| %>
+          <%= image_tag (smiley.image), width: '150px', class: "img-responsive"%>
+
+          <!-- <div class="caption" style="text-align:center;"> -->
+
+            <%= link_to like_smiley_path(smiley), class: "like", method: :put do %>
+              <button type="button" class="btn btn-info" aria-label="Left Align">
+                <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+                <span class="badge"><%= smiley.get_upvotes.size %></span>
+              </button>
+            <% end %>
+
+          <!-- </div> -->
+        <% end %>
+
+        <!-- </div>
+      </div> -->
