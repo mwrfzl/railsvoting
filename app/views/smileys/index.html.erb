@@ -23,8 +23,8 @@
           <!-- <div class="caption" style="text-align:center;"> -->
 
             <%= link_to like_smiley_path(smiley), class: "like", method: :put do %>
-              <button type="button" class="btn btn-info" aria-label="Left Align">
-                <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span>
+              <button type="button" class="btn btn-info">
+                <!-- <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span> -->
                 <span class="badge"><%= smiley.get_upvotes.size %></span>
               </button>
             <% end %>

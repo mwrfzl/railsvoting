@@ -63,14 +63,13 @@ class SmileysController < ApplicationController
 
   # upvote_from user
   def upvote
+    @smiley = Smiley.find(params[:id])
     if current_user
       @smiley.upvote_from current_user
     else
-      @session = Votersession.find_by(session_id: request.session_options[:id])
-      if @session == nil
-        @session = Votersession.create(session_id: request.session_options[:id])
-      end
-      @smiley.upvote_from @session
+      session[:session_id] = request.remote_ip
+      voter = Votersession.find_or_create_by(session_id: session[:session_id])
+      @smiley.upvote_from voter
     end
     redirect_to new_feedback_path
   end
