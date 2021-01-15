@@ -14,23 +14,24 @@
 <br/>
 <br/>
 
+<div class="container text-center">
+  <!-- <div class="col-sm-6 col-md-4">
+    <div class="img-fluid"> -->
+    <% @smileys.each do |smiley| %>
+      <%= image_tag (smiley.image), width: '150px', class: "img-responsive"%>
 
-      <!-- <div class="col-sm-6 col-md-4">
-        <div class="img-fluid"> -->
-        <% @smileys.each do |smiley| %>
-          <%= image_tag (smiley.image), width: '150px', class: "img-responsive"%>
+      <!-- <div class="caption" style="text-align:center;"> -->
 
-          <!-- <div class="caption" style="text-align:center;"> -->
-
-            <%= link_to like_smiley_path(smiley), class: "like", method: :put do %>
-              <button type="button" class="btn btn-info">
-                <!-- <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span> -->
-                <span class="badge"><%= smiley.get_upvotes.size %></span>
-              </button>
-            <% end %>
-
-          <!-- </div> -->
+        <%= link_to like_smiley_path(smiley), class: "like", method: :put do %>
+          <button type="button" class="btn btn-info">
+            <!-- <span class="glyphicon glyphicon-thumbs-up glyphicon-align-center" aria-hidden="true"></span> -->
+            <span class="badge"><%= smiley.get_upvotes.size %></span>
+          </button>
         <% end %>
 
-        <!-- </div>
-      </div> -->
+      <!-- </div> -->
+    <% end %>
+
+    <!-- </div>
+  </div> -->
+</div>
