@@ -1,3 +1,9 @@
+<% if user_signed_in? %>
+  <%= link_to new_smiley_path do %>
+    <button type="button" class="btn btn-secondary">Create Smiley</button>
+  <% end %>
+<% end %>
+<br/>
 <br/>
 <br/>
 <div class="row">

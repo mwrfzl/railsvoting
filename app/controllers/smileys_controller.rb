@@ -1,4 +1,5 @@
 class SmileysController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show, :upvote]
   before_action :set_smiley, only: [:show, :edit, :update, :destroy, :upvote]
 
   # GET /smileys
