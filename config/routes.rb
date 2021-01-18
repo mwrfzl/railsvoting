@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  resources :feedbacks
   devise_for :users
   root 'smileys#index'
+
+  resources :feedbacks
   resources :smileys do
     member do
       put "like" => "smileys#upvote"
