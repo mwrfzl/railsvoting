@@ -7,13 +7,17 @@
       <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Guest Preview</a>
     </li>
     <li class="nav-item" role="presentation">
-      <a class="nav-link" id="voting-tab" data-bs-toggle="tab" href="#voting" role="tab" aria-controls="voting" aria-selected="false">Voting Result</a>
+      <a class="nav-link" id="smiley-tab" data-bs-toggle="tab" href="#smiley" role="tab" aria-controls="smiley" aria-selected="false">Smiley Result</a>
+    </li>
+    <li class="nav-item" role="presentation">
+      <a class="nav-link" id="voting-tab" data-bs-toggle="tab" href="#voting" role="tab" aria-controls="voting" aria-selected="false">Feedback Result</a>
     </li>
     <li class="nav-item" role="presentation">
       <a class="nav-link" id="setting-tab" data-bs-toggle="tab" href="#setting" role="tab" aria-controls="setting" aria-selected="false">Setting</a>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
+    <!--Home Tab-->
     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
       <br/>
 
@@ -36,20 +40,148 @@
           <% end %>
       </div>
     </div>
+    <!--Smiley Tab-->
+    <div class="tab-pane fade" id="smiley" role="tabpanel" aria-labelledby="smiley-tab">
+      <br>
+      <h4>The figure shows the number of guests voted for the respective smiley.</h4>
+      <br/>
+      <br/>
+      <div class="container text-center">
+          <% @smileys.each do |smiley| %>
+            <%= image_tag (smiley.image), width: '150px', class: "img-responsive"%>
+            <%= smiley.get_upvotes.size %>
+          <% end %>
+      </div>
+    </div>
+    <!--Voting Tab-->
     <div class="tab-pane fade" id="voting" role="tabpanel" aria-labelledby="voting-tab">
       <br>
+      <h4>The pie chart is displaying the feedbacks obtained from guests based on the toilet conditions.</h4>
+      <br/>
+      <br/>
       <div class="row">
-        <div class="container-fluid">
-          <h4>The pie chart is displaying the feedbacks obtained from guests.</h4>
+        <div class="col">
+          <%= pie_chart [["Foul Smell", Feedback.where(foul_smell: true).count],
+          ["Mirror Dirty", Feedback.where(mirror_dirty: true).count],
+          ["Toilet Bowl", Feedback.where(toilet_bowl: true).count],
+          ["Wet Floor", Feedback.where(wet_floor: true).count],
+          ["Water Tap", Feedback.where(water_tap: true).count],
+          ["Toilet Paper", Feedback.where(toilet_paper: true).count],
+          ["Rubbish Bin", Feedback.where(rubbish_bin: true).count],
+          ["No Soap", Feedback.where(no_soap: true).count],
+          ["Hand Dryer", Feedback.where(hand_dryer: true).count]],
+           id:'polls,'%>
+        </div>
+        <div class="col">
           <br/>
+          <h6 class="fw-bold text-center">Number Of Votes</h6>
           <br/>
-          <div class="row">
-            <div class="col-5 offset-1">
-            </div>
-          </div>
+          <table id='feedback-table' class="table table-hover">
+            <thead class="thead-light">
+              <tr>
+                <th>Foul Smell</th>
+                <th>Mirror Dirty</th>
+                <th>Toilet Bowl</th>
+                <th>Wet Floor</th>
+                <th>Water Tap</th>
+                <th>Toilet Paper</th>
+                <th>Rubbish Bin</th>
+                <th>No Soap</th>
+                <th>Hand Dryer</th>
+                <th colspan="3"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% Feedback.all.each do |feedback| %>
+                <tr>
+                  <td><%= feedback.foul_smell %></td>
+                  <td><%= feedback.mirror_dirty %></td>
+                  <td><%= feedback.toilet_bowl %></td>
+                  <td><%= feedback.wet_floor %></td>
+                  <td><%= feedback.water_tap %></td>
+                  <td><%= feedback.toilet_paper %></td>
+                  <td><%= feedback.rubbish_bin %></td>
+                  <td><%= feedback.no_soap %></td>
+                  <td><%= feedback.hand_dryer %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <hr>
+      <br/>
+      <br/>
+      <div class="row">
+        <div class="col text-center">
+          <h6>1. Foul Smell</h6>
+        </div>
+        <div class="col text-center">
+          <h6>2. Mirror Dirty</h6>
+        </div>
+        <div class="col text-center">
+          <h6>3. Toilet Bowl</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= pie_chart Feedback.group(:foul_smell).count %>
+        </div>
+        <div class="col">
+          <%= pie_chart Feedback.group(:mirror_dirty).count %>
+        </div>
+        <div class="col">
+          <%= pie_chart Feedback.group(:toilet_bowl).count %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <h6>4. Wet Floor</h6>
+        </div>
+        <div class="col text-center">
+          <h6>5. Water Tap</h6>
+        </div>
+        <div class="col text-center">
+          <h6>6. Toilet Paper</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= pie_chart Feedback.group(:wet_floor).count %>
+        </div>
+        <div class="col">
+          <%= pie_chart Feedback.group(:water_tap).count %>
+        </div>
+        <div class="col">
+          <%= pie_chart Feedback.group(:toilet_paper).count %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col text-center">
+          <h6>7. Rubbish Bin</h6>
+        </div>
+        <div class="col text-center">
+          <h6>8. No Soap</h6>
+        </div>
+        <div class="col text-center">
+          <h6>9. Hand Dryer</h6>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <%= pie_chart Feedback.group(:rubbish_bin).count %>
+        </div>
+        <div class="col">
+          <%= pie_chart Feedback.group(:no_soap).count %>
+        </div>
+        <div class="col">
+          <%= pie_chart Feedback.group(:hand_dryer).count %>
         </div>
       </div>
     </div>
+    <!--Setting Tab-->
     <div class="tab-pane fade" id="setting" role="tabpanel" aria-labelledby="setting-tab">
       <br/>
       <br/>
